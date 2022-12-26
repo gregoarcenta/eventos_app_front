@@ -1,0 +1,7 @@
+{
+  "name": "eventos_app_front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
