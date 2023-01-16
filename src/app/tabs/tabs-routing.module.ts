@@ -1,36 +1,40 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { TabsPage } from './tabs.page';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "../guards/auth.guard";
+import { TabsPage } from "./tabs.page";
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: "",
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: "eventos",
+        loadChildren: () =>
+          import("../pages/event-list/event-list.module").then((m) => m.EventListPageModule),
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: "buscar",
+        loadChildren: () =>
+          import(
+            "../pages/search-events/search-events.module"
+          ).then((m) => m.SearchEventsPageModule),
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: "cuenta",
+        loadChildren: () =>
+          import("../pages/account/account.module").then(
+            (m) => m.AccountPageModule
+          ),
+          canActivate:[AuthGuard]
       },
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
-    ]
+        path: "",
+        redirectTo: "/eventos",
+        pathMatch: "full",
+      },
+    ],
   },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

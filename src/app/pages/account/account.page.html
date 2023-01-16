@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1 class="text-center">Mi cuenta</h1>
+  <div *ngIf="authUser">
+    <h6>Bienvenido, {{authUser.name}} {{authUser.surname}}</h6>
+
+    <ion-button (click)="logout()" expand="block" fill="clear">
+      Cerrar sesión
+    </ion-button>
+  </div>
+</ion-content>

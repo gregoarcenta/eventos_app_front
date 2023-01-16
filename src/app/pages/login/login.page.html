@@ -1,0 +1,154 @@
+<!-- <ion-header class="d-block d-md-none">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="inicio"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ -->
+<ion-content>
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col-md-6 d-none d-md-block position-relative bg"></div>
+
+      <div class="col-12 col-md-6 position-relative">
+        <!--logo mobile-->
+        <div class="logo text-center">
+          <img
+            src="/assets/logos/logoletraswhite200.png"
+            alt="logo"
+            class="img-fluid d-inline-block d-md-none"
+          />
+        </div>
+
+        <!--formulario-->
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="login()"
+          class="rounded-3 p-3"
+        >
+          <div class="container-form">
+            <!--logo desktop-->
+            <div class="text-center">
+              <img
+                src="/assets/logos/logoletrasblack400.png"
+                alt="logo"
+                class="img-fluid d-none d-md-inline-block"
+                style="height: auto; max-width: 260px;"
+              />
+            </div>
+
+            <!--email-->
+            <div class="mb-3">
+              <label for="email">Usuario o correo electrónico</label>
+              <input
+                type="text"
+                placeholder="micorreo@mail.com"
+                class="form-control"
+                formControlName="username"
+                id="email"
+              />
+              <small
+                *ngIf="validInput('username')"
+                class="form-text text-danger"
+                >Usuario o email requerido</small
+              >
+            </div>
+
+            <!--password-->
+            <div class="mb-2">
+              <label for="password">Contraseña</label>
+              <input
+                type="password"
+                placeholder="**********"
+                formControlName="password"
+                class="form-control"
+                id="password"
+              />
+              <small
+                *ngIf="validInput('password')"
+                class="form-text text-danger"
+                >La contraseña es requerida</small
+              >
+            </div>
+
+            <!--recuperar contraseña-->
+            <a class="enlace d-block text-end fw-bold small">
+              Olvide mi contraseña
+            </a>
+
+            <!--boton submit-->
+            <div class="text-center my-2">
+              <ion-button type="submit" color="primary" class="w-100">
+                Iniciar sesión
+              </ion-button>
+            </div>
+
+            <!--registrate-->
+            <div class="text-center mt-3">
+              ¿No tienes cuenta?
+              <a class="enlace text-light fw-bold small">
+                Regístrate aquí
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<!-- <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <h3>Seleccione Avatar</h3>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-slides>
+              <ion-slide *ngFor="let avatar of [1,1,1,1,1,1,1]">
+                <ion-img
+                  class="pick-avatar"
+                  src="/assets/avatars/av-1.png"
+                ></ion-img>
+              </ion-slide>
+            </ion-slides>
+          </ion-col>
+        </ion-row>
+
+        <form>
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item>
+                  <ion-label>Email</ion-label>
+                  <ion-input name="email" type="email" required></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>Nombre</ion-label>
+                  <ion-input name="nombre" type="text" required></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>Password</ion-label>
+                  <ion-input
+                    name="password"
+                    type="password"
+                    required
+                  ></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="tertiary" shape="round">
+                Crear usuario
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid> -->
