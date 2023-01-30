@@ -11,14 +11,16 @@ const routes: Routes = [
       {
         path: "eventos",
         loadChildren: () =>
-          import("../pages/event-list/event-list.module").then((m) => m.EventListPageModule),
+          import("../pages/event-list/event-list.module").then(
+            (m) => m.EventListPageModule
+          ),
       },
       {
         path: "buscar",
         loadChildren: () =>
-          import(
-            "../pages/search-events/search-events.module"
-          ).then((m) => m.SearchEventsPageModule),
+          import("../pages/search-events/search-events.module").then(
+            (m) => m.SearchEventsPageModule
+          ),
       },
       {
         path: "cuenta",
@@ -26,7 +28,14 @@ const routes: Routes = [
           import("../pages/account/account.module").then(
             (m) => m.AccountPageModule
           ),
-          canActivate:[AuthGuard]
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "recuperar-cuenta",
+        loadChildren: () =>
+          import(
+            "../pages/send-mail-restore-password/send-mail-restore-password.module"
+          ).then((m) => m.SendMailRestorePasswordPageModule),
       },
       {
         path: "",

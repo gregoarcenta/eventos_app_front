@@ -16,12 +16,8 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "",
-  }
-/*   {
-    path: 'send-mail-restore-password',
-    loadChildren: () => import('./pages/send-mail-restore-password/send-mail-restore-password.module').then( m => m.SendMailRestorePasswordPageModule)
-  }, */
-/*   {
+  },
+  /*   {
     path: 'restore-password',
     loadChildren: () => import('./pages/restore-password/restore-password.module').then( m => m.RestorePasswordPageModule)
   }, */
