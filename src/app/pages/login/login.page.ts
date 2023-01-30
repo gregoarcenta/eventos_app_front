@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginService } from "./login.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-login",
@@ -58,7 +59,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   validInput(name: string) {
-    return this.loginForm.get(name)?.invalid && this.loginForm.get(name)?.touched;
+    return (
+      this.loginForm.get(name)?.invalid && this.loginForm.get(name)?.touched
+    );
   }
 
   login() {
@@ -66,7 +69,7 @@ export class LoginPage implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-
+    // this.spinner.setActive(true);
     this.loginService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.router.navigateByUrl("/");
@@ -75,15 +78,19 @@ export class LoginPage implements OnInit {
       error: ({ error }) => {
         // this.spinner.setActive(false);
         if (error.status === 422 || error.status === 401) {
-          console.log('Usuario o contraseña incorrectos');
-
-          // Swal.fire("Error", "Usuario o contraseña incorrectos", "error");
+          Swal.fire({
+            title: "Error",
+            text: "Usuario o contraseña incorrectos",
+            icon: "error",
+            heightAuto: false,
+          });
         } else {
-          /* Swal.fire(
-            "Error",
-            "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
-            "error"
-          ); */
+          Swal.fire({
+            title: "Error",
+            text:
+              "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
+            icon: "error",
+          });
         }
       },
     });
