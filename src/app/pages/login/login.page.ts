@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginService } from "./login.service";
 import Swal from "sweetalert2";
+import { SpinnerService } from "src/app/services/spinner.service";
 
 @Component({
   selector: "app-login",
@@ -52,6 +53,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private spinner: SpinnerService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -69,14 +71,14 @@ export class LoginPage implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-    // this.spinner.setActive(true);
+    this.spinner.setActive(true);
     this.loginService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.router.navigateByUrl("/");
-        // this.spinner.setActive(false);
+        this.spinner.setActive(false);
       },
       error: ({ error }) => {
-        // this.spinner.setActive(false);
+        this.spinner.setActive(false);
         if (error.status === 422 || error.status === 401) {
           Swal.fire({
             title: "Error",
