@@ -1,4 +1,4 @@
-<ion-tabs *ngIf="isMobile">
+<ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="eventos">
       <ion-icon name="list"></ion-icon>
@@ -16,13 +16,3 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-<!--Desktop-->
-<ion-content *ngIf="!isMobile">
-  <header>HEADER</header>
-
-  <div>
-    <ion-router-outlet></ion-router-outlet>
-  </div>
-
-  <footer>FOOTER</footer>
-</ion-content>

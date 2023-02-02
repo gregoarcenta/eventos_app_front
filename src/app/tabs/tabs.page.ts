@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { DeviceDetectorService } from "ngx-device-detector";
 
 @Component({
   selector: "app-tabs",
@@ -7,9 +6,6 @@ import { DeviceDetectorService } from "ngx-device-detector";
   styleUrls: ["tabs.page.scss"],
 })
 export class TabsPage {
-  public isMobile?: boolean;
-
-  constructor(private deviceService: DeviceDetectorService) {
-    this.isMobile = this.deviceService.isMobile();
+  constructor() {
   }
 }

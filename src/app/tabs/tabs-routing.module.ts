@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../guards/auth.guard";
+import { NoAuthGuard } from "../guards/no-auth.guard";
 import { TabsPage } from "./tabs.page";
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
           import("../pages/account/account.module").then(
             (m) => m.AccountPageModule
           ),
-        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
       },
       {
         path: "recuperar-cuenta",
@@ -36,6 +37,15 @@ const routes: Routes = [
           import(
             "../pages/send-mail-restore-password/send-mail-restore-password.module"
           ).then((m) => m.SendMailRestorePasswordPageModule),
+        canLoad: [NoAuthGuard],
+      },
+      {
+        path: "recuperar-cuenta/:token",
+        loadChildren: () =>
+          import("../pages/restore-password/restore-password.module").then(
+            (m) => m.RestorePasswordPageModule
+          ),
+        canLoad: [NoAuthGuard],
       },
       {
         path: "",

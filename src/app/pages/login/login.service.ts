@@ -4,6 +4,7 @@ import { catchError, map, Observable, of, tap } from "rxjs";
 import { ResponseUser, User } from "src/app/interfaces/User";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
+import { SpinnerService } from "src/app/services/spinner.service";
 
 @Injectable({
   providedIn: "root",
@@ -20,7 +21,11 @@ export class LoginService {
     this.authUser = user;
   }
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private spinner: SpinnerService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   isAuthenticate(): Observable<boolean> {
     const token: string = localStorage.getItem("token") || "";
@@ -29,6 +34,7 @@ export class LoginService {
     if (token && this.authUser) return of(true);
 
     if (token) {
+      this.spinner.setActive(true);
       headers = headers.set("authorization", `bearer ${token}`);
       return this.http
         .get<ResponseUser>(`${this.url}/login/renew`, {
@@ -38,9 +44,12 @@ export class LoginService {
           map(({ data }) => {
             localStorage.setItem("token", data.jwt);
             this.authUser = data.user;
+            this.spinner.setActive(false);
             return true;
           }),
           catchError(({ error }) => {
+            //TODO: Aqui colocar alert se sesion expirada, validar peticion
+            this.spinner.setActive(false);
             this.logout();
             return of(false);
           })
@@ -65,8 +74,10 @@ export class LoginService {
   }
 
   logout() {
+    this.spinner.setActive(true);
     localStorage.removeItem("token");
     this.authUser = undefined;
     this.router.navigateByUrl("/login");
+    this.spinner.setActive(false);
   }
 }

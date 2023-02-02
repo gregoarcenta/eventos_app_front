@@ -81,17 +81,18 @@ export class LoginPage implements OnInit {
         this.spinner.setActive(false);
         if (error.status === 422 || error.status === 401) {
           Swal.fire({
-            title: "Error",
+            title: "Lo sentimos!",
             text: "Usuario o contraseña incorrectos",
             icon: "error",
             heightAuto: false,
           });
         } else {
           Swal.fire({
-            title: "Error",
+            title: "Lo sentimos!",
             text:
               "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
             icon: "error",
+            heightAuto: false,
           });
         }
       },

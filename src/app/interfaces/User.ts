@@ -1,6 +1,6 @@
 export interface ResponseUser {
   status:  number;
-  message: null | string;
+  message: string;
   data:    Data;
 }
 

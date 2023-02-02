@@ -16,7 +16,11 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "",
+  },  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
+
   /*   {
     path: 'restore-password',
     loadChildren: () => import('./pages/restore-password/restore-password.module').then( m => m.RestorePasswordPageModule)
