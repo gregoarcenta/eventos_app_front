@@ -9,30 +9,23 @@ const routes: Routes = [
       import("./tabs/tabs.module").then((m) => m.TabsPageModule),
   },
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    canLoad:[NoAuthGuard]
+    path: "login",
+    loadChildren: () =>
+      import("./pages/login/login.module").then((m) => m.LoginPageModule),
+    canLoad: [NoAuthGuard],
+  },
+  {
+    path: "registro",
+    loadChildren: () =>
+      import("./pages/register/register.module").then(
+        (m) => m.RegisterPageModule
+      ),
+    canLoad: [NoAuthGuard],
   },
   {
     path: "**",
     redirectTo: "",
-  },  {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
-
-  /*   {
-    path: 'restore-password',
-    loadChildren: () => import('./pages/restore-password/restore-password.module').then( m => m.RestorePasswordPageModule)
-  }, */
-  /*   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
-  } */
 ];
 @NgModule({
   imports: [

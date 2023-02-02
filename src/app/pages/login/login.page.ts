@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginService } from "./login.service";
-import Swal from "sweetalert2";
 import { SpinnerService } from "src/app/services/spinner.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-login",
@@ -79,7 +79,15 @@ export class LoginPage implements OnInit {
       },
       error: ({ error }) => {
         this.spinner.setActive(false);
-        if (error.status === 422 || error.status === 401) {
+        if (error.message === "unverified email") {
+          Swal.fire({
+            title: "Lo sentimos!",
+            text:
+              "Tienes que confirmar tu cuenta con el enlace que te hemos enviado a tu correo electrónico",
+            icon: "error",
+            heightAuto: false,
+          });
+        } else if (error.status === 422 || error.status === 401) {
           Swal.fire({
             title: "Lo sentimos!",
             text: "Usuario o contraseña incorrectos",

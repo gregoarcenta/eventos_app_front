@@ -37,7 +37,7 @@ export class SendMailRestorePasswordPage implements OnInit {
         next: (response) => {
           this.spinner.setActive(false);
           Swal.fire({
-            title: "Exito!",
+            title: "Listo!",
             text: response.message,
             icon: "success",
             heightAuto: false,

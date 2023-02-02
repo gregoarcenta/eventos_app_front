@@ -5,6 +5,7 @@ import { ResponseUser, User } from "src/app/interfaces/User";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { SpinnerService } from "src/app/services/spinner.service";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: "root",
@@ -48,7 +49,14 @@ export class LoginService {
             return true;
           }),
           catchError(({ error }) => {
-            //TODO: Aqui colocar alert se sesion expirada, validar peticion
+            if (error.message === "jwt expired") {
+              Swal.fire({
+                title: "Sesión expirada",
+                text: "Tu sesión expiró, inicia sesión nuevamente",
+                icon: "info",
+                heightAuto: false,
+              });
+            }
             this.spinner.setActive(false);
             this.logout();
             return of(false);

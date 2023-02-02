@@ -1,9 +1,149 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="container mt-3">
+    <ng-container *ngIf="!register; else msgTemplate">
+      <!--logo mobile-->
+      <div class="logo text-center">
+        <img
+          src="/assets/logos/logoletrasblack200.png"
+          alt="logo"
+          class="img-fluid d-inline-block d-md-none"
+        />
+      </div>
+      <!--formulario de registro-->
+      <form [formGroup]="registerForm">
+        <h2 class="text-center fw-bold">Crea tu cuenta</h2>
+        <!--name-->
+        <div class="mb-3">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            placeholder="ingrese su nombre"
+            formControlName="name"
+            class="form-control"
+            id="name"
+          />
+          <small *ngIf="validInput('name')" class="form-text text-danger"
+            >La nombre es requerido</small
+          >
+        </div>
+        <!--surname-->
+        <div class="mb-3">
+          <label for="surname">Apellido</label>
+          <input
+            type="text"
+            placeholder="ingrese su apellido"
+            formControlName="surname"
+            class="form-control"
+            id="surname"
+          />
+          <small *ngIf="validInput('surname')" class="form-text text-danger"
+            >El apellido es requerido</small
+          >
+        </div>
+        <!--email-->
+        <div class="mb-3">
+          <label for="email">Correo electrónico</label>
+          <input
+            type="email"
+            placeholder="ingrese su correo"
+            formControlName="email"
+            class="form-control"
+            id="email"
+          />
+          <small *ngIf="validInput('email')" class="form-text text-danger"
+            >{{getMsgErrorEmail}}</small
+          >
+        </div>
+        <!--username-->
+        <div class="mb-3">
+          <label for="username">Usuario</label>
+          <input
+            type="text"
+            placeholder="ingrese un nombre de usuario"
+            formControlName="username"
+            class="form-control"
+            id="username"
+          />
+          <small *ngIf="validInput('username')" class="form-text text-danger"
+            >El usuario es requerido</small
+          >
+        </div>
+        <!--password-->
+        <div class="mb-3">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            placeholder="**********"
+            formControlName="password"
+            class="form-control"
+            id="password"
+          />
+          <small
+            *ngIf="validInput('password')"
+            class="form-text text-danger"
+            [innerHTML]="getMsgErrorPass"
+          ></small>
+        </div>
+        <!--password2-->
+        <div class="mb-3">
+          <label for="password2">Confirmar contraseña</label>
+          <input
+            type="password"
+            placeholder="**********"
+            formControlName="password2"
+            class="form-control"
+            id="password2"
+          />
+          <small *ngIf="validInput('password2')" class="form-text text-danger"
+            >{{getMsgErrorConfirm}}</small
+          >
+        </div>
+        <!--terminos-->
+        <div class="mb-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="checkTerminos"
+            formControlName="terminos"
+          />
+          <label class="form-check-label ms-2" for="checkTerminos">
+            He leído y acepto los
+            <a target="_blank" [routerLink]="['/terminos']" class="link"
+              >términos y condiciones</a
+            >
+          </label>
+        </div>
+        <!--boton submit-->
+        <div class="text-center my-2">
+          <ion-button
+            type="submit"
+            color="primary"
+            class="w-100"
+            (click)="formSubmit()"
+          >
+            Registrarse
+          </ion-button>
+        </div>
+      </form>
+    </ng-container>
+  </div>
 </ion-content>
+
+<ng-template #msgTemplate>
+  <div class="alert alert-info mt-3" role="alert">
+    <h2 class="text-center"><strong>Listo!</strong></h2>
+    <h5 class="text-center">
+      No olvides confirmar tu cuenta en el enlace de verificación que hemos
+      enviado a <strong>{{ registerForm.value.email }} 📩</strong>
+    </h5>
+  </div>
+</ng-template>
