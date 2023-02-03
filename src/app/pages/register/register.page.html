@@ -20,7 +20,7 @@
       </div>
       <!--formulario de registro-->
       <form [formGroup]="registerForm">
-        <h2 class="text-center fw-bold">Crea tu cuenta</h2>
+        <h2 class="text-center fw-bold mt-5 mb-4">Crea tu cuenta</h2>
         <!--name-->
         <div class="mb-3">
           <label for="name">Nombre</label>
@@ -74,7 +74,7 @@
             id="username"
           />
           <small *ngIf="validInput('username')" class="form-text text-danger"
-            >El usuario es requerido</small
+            >{{getMsgErrorUsername}}</small
           >
         </div>
         <!--password-->

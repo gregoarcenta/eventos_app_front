@@ -13,18 +13,18 @@ import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root",
 })
-export class EmailValidatorService implements AsyncValidator {
+export class UsernameValidatorService implements AsyncValidator {
   public url = environment.url;
 
   constructor(private userService: UserService) {}
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
-    const email = control.value;
-    return this.userService.getUserByEmail(email).pipe(
+    const username = control.value;
+    return this.userService.getUserByUsername(username).pipe(
       map((valid) => {
         if (valid) return null;
 
-        return { exists_email: true };
+        return { exists_username: true };
       })
     );
   }

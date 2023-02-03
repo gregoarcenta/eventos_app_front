@@ -2,10 +2,17 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SpinnerService } from "src/app/services/spinner.service";
-import { _patternMail, _patternPassword } from "src/app/utils/regularPatterns";
+import {
+  _patternMail,
+  _patternPassword,
+  _patterUsername,
+} from "src/app/utils/regularPatterns";
 import { CustomValidators } from "src/app/validations/validations-forms";
 import { RegisterService } from "./register.service";
 import Swal from "sweetalert2";
+import { UserService } from "src/app/services/user.service";
+import { EmailValidatorService } from "src/app/validations/Services/email-validator.service";
+import { UsernameValidatorService } from "src/app/validations/Services/username-validator.service";
 
 @Component({
   selector: "app-register",
@@ -15,13 +22,20 @@ import Swal from "sweetalert2";
 export class RegisterPage implements OnInit {
   public register: boolean = false;
 
-  //TODO:Agregar validacion para que no se repita el email y el usuario
   public registerForm = this.fb.group(
     {
       name: ["", [Validators.required]],
       surname: ["", [Validators.required]],
-      email: ["", [Validators.required, Validators.pattern(_patternMail)]],
-      username: ["", [Validators.required]],
+      email: [
+        "",
+        [Validators.required, Validators.pattern(_patternMail)],
+        [this.evs],
+      ],
+      username: [
+        "",
+        [Validators.required, Validators.pattern(_patterUsername)],
+        [this.uvs],
+      ],
       password: [
         "",
         [Validators.required, Validators.pattern(_patternPassword)],
@@ -41,6 +55,23 @@ export class RegisterPage implements OnInit {
     }
     if (controlEmail.getError("pattern")) {
       return "Formato de email invalido";
+    }
+    if (controlEmail.getError("exists_email")) {
+      return "El email ingresado ya existe";
+    }
+    return "";
+  }
+
+  get getMsgErrorUsername() {
+    const controlEmail = this.registerForm.controls["username"];
+    if (controlEmail.getError("required")) {
+      return "El nombre de usuario es requerido";
+    }
+    if (controlEmail.getError("pattern")) {
+      return "Nombre de usuario invalido";
+    }
+    if (controlEmail.getError("exists_username")) {
+      return "El nombre de usuario ingresado ya esta en uso";
     }
     return "";
   }
@@ -89,6 +120,9 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private registerService: RegisterService,
+    private evs: EmailValidatorService,
+    private uvs: UsernameValidatorService,
+    private userService: UserService,
     private spinner: SpinnerService,
     private fb: FormBuilder,
     private router: Router
