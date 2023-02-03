@@ -49,6 +49,7 @@ export class RestorePasswordPage implements OnInit {
     }
     return "";
   }
+
   constructor(
     private restoreAccountService: RestoreAccountService,
     private spinner: SpinnerService,
@@ -74,7 +75,7 @@ export class RestorePasswordPage implements OnInit {
           if (error.status === 404) {
             Swal.fire({
               title: "Lo sentimos!",
-              text: "Ya has cambiado de contraseña",
+              text: error.message,
               icon: "error",
               heightAuto: false,
             });
@@ -133,7 +134,7 @@ export class RestorePasswordPage implements OnInit {
           } else if (error.status === 401) {
             Swal.fire({
               title: "Lo sentimos!",
-              text: "Ya has cambiado de contraseña",
+              text: error.message,
               icon: "error",
               heightAuto: false,
             });

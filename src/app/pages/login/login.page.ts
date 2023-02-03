@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
       },
       error: ({ error }) => {
         this.spinner.setActive(false);
-        if (error.message === "unverified email") {
+        if (error.message === "Cuenta aun no verificada") {
           Swal.fire({
             title: "Lo sentimos!",
             text:

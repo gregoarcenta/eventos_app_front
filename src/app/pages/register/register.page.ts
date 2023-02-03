@@ -110,7 +110,6 @@ export class RegisterPage implements OnInit {
   }
 
   onRegister() {
-    console.log("enviando... ", this.registerForm.value);
     this.spinner.setActive(true);
     this.registerService.register(this.registerForm.value).subscribe({
       next: (response) => {
@@ -122,28 +121,16 @@ export class RegisterPage implements OnInit {
           heightAuto: false,
         });
         this.register = true;
-        sessionStorage.setItem("register", this.registerForm.value.email!);
         setTimeout(() => {
           this.router.navigateByUrl("login");
         }, 10000);
       },
       error: ({ error }) => {
-        console.error(error);
         this.spinner.setActive(false);
-        if (error.message === "The email is already in use") {
+        if (error.status === 400) {
           Swal.fire({
             title: "Lo sentimos!",
-            text: "El correo ingresado ya existe",
-            icon: "error",
-            heightAuto: false,
-          });
-        } else if (
-          error.message ===
-          `The username ${this.registerForm.value.username} is already in use`
-        ) {
-          Swal.fire({
-            title: "Lo sentimos!",
-            text: `El nombre de usuario ya se encuetra en uso`,
+            text: error.message,
             icon: "error",
             heightAuto: false,
           });

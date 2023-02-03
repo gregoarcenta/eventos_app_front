@@ -52,7 +52,7 @@ export class SendMailRestorePasswordPage implements OnInit {
           if (error.status === 400) {
             Swal.fire({
               title: "Lo sentimos!",
-              text: "El correo ingresado no existe",
+              text: error.message,
               icon: "error",
               heightAuto: false,
             });
