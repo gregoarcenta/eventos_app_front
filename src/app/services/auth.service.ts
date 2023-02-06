@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 })
 export class AuthService {
   private authUser?: User;
-  private url = environment.url;
+  private url: string = environment.url;
 
   get getAuthUser() {
     return this.authUser;

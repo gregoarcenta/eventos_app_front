@@ -5,6 +5,7 @@ import { User } from "src/app/interfaces/User";
 import { RestoreAccountService } from "src/app/services/restore-account.service";
 import { SpinnerService } from "src/app/services/spinner.service";
 import { _patternPassword } from "src/app/utils/regularPatterns";
+import { environment } from "src/environments/environment";
 import Swal from "sweetalert2";
 
 @Component({
@@ -89,8 +90,7 @@ export class RestorePasswordPage implements OnInit {
           } else {
             Swal.fire({
               title: "Lo sentimos!",
-              text:
-                "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
+              text:environment.msgErrorDefault,
               icon: "error",
               heightAuto: false,
             });
@@ -141,8 +141,7 @@ export class RestorePasswordPage implements OnInit {
           } else {
             Swal.fire({
               title: "Lo sentimos!",
-              text:
-                "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
+              text:environment.msgErrorDefault,
               icon: "error",
               heightAuto: false,
             });

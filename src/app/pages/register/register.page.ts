@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { UserService } from "src/app/services/user.service";
 import { EmailValidatorService } from "src/app/validations/Services/email-validator.service";
 import { UsernameValidatorService } from "src/app/validations/Services/username-validator.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-register",
@@ -171,8 +172,7 @@ export class RegisterPage implements OnInit {
         } else {
           Swal.fire({
             title: "Lo sentimos!",
-            text:
-              "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
+            text:environment.msgErrorDefault,
             icon: "error",
             heightAuto: false,
           });

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SpinnerService } from "src/app/services/spinner.service";
+import { environment } from "src/environments/environment";
 import Swal from "sweetalert2";
 import { RegisterService } from "../../register.service";
 
@@ -57,8 +58,7 @@ export class VerifyRegisterComponent implements OnInit {
         } else {
           Swal.fire({
             title: "Lo sentimos!",
-            text:
-              "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
+            text:environment.msgErrorDefault,
             icon: "error",
             heightAuto: false,
           });

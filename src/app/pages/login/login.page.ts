@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { SpinnerService } from "src/app/services/spinner.service";
 import Swal from "sweetalert2";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-login",
@@ -11,41 +12,6 @@ import Swal from "sweetalert2";
   styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
-  public avatars = [
-    {
-      img: "av-1.png",
-      seleccionado: true,
-    },
-    {
-      img: "av-2.png",
-      seleccionado: false,
-    },
-    {
-      img: "av-3.png",
-      seleccionado: false,
-    },
-    {
-      img: "av-4.png",
-      seleccionado: false,
-    },
-    {
-      img: "av-5.png",
-      seleccionado: false,
-    },
-    {
-      img: "av-6.png",
-      seleccionado: false,
-    },
-    {
-      img: "av-7.png",
-      seleccionado: false,
-    },
-    {
-      img: "av-8.png",
-      seleccionado: false,
-    },
-  ];
-
   public loginForm = this.fb.group({
     username: ["", [Validators.required]],
     password: ["", [Validators.required]],
@@ -67,10 +33,8 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
+    if (this.loginForm.invalid) return this.loginForm.markAllAsTouched();
+
     this.spinner.setActive(true);
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
@@ -97,8 +61,7 @@ export class LoginPage implements OnInit {
         } else {
           Swal.fire({
             title: "Lo sentimos!",
-            text:
-              "Ha ocurrido un error inesperado en el sistema, vuelva a intentarlo mas tarde",
+            text:environment.msgErrorDefault,
             icon: "error",
             heightAuto: false,
           });
