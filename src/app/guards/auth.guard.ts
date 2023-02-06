@@ -9,19 +9,19 @@ import {
   UrlSegment,
 } from "@angular/router";
 import { Observable, tap } from "rxjs";
-import { LoginService } from "../pages/login/login.service";
+import { AuthService } from "../services/auth.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate, CanLoad {
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.loginService.isAuthenticate().pipe(
+    return this.authService.isAuthenticate().pipe(
       tap((valid) => {
         if (!valid) {
           this.router.navigateByUrl("/login");
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     );
   }
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
-    return this.loginService.isAuthenticate().pipe(
+    return this.authService.isAuthenticate().pipe(
       tap((valid) => {
         if (!valid) {
           this.router.navigateByUrl("/login");

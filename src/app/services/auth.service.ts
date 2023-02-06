@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 @Injectable({
   providedIn: "root",
 })
-export class LoginService {
+export class AuthService {
   private authUser?: User;
   private url = environment.url;
 

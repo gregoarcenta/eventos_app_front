@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { LoginService } from "./login.service";
+import { AuthService } from "../../services/auth.service";
 import { SpinnerService } from "src/app/services/spinner.service";
 import Swal from "sweetalert2";
 
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
   });
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private spinner: SpinnerService,
     private fb: FormBuilder,
     private router: Router
@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
       return;
     }
     this.spinner.setActive(true);
-    this.loginService.login(this.loginForm.value).subscribe({
+    this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.router.navigateByUrl("/");
         this.spinner.setActive(false);
